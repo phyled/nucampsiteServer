@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
+ //Subdocument, references another document
 const commentSchema = new Schema({
     rating: {
         type: Number,
@@ -15,7 +16,7 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    author: {
+    author: { // This is saying to reference another collection, "User"
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
@@ -23,6 +24,7 @@ const commentSchema = new Schema({
     timestamps: true
 });
 
+ //This is a document
 const campsiteSchema = new Schema({
     name: {
         type: String,
@@ -50,7 +52,7 @@ const campsiteSchema = new Schema({
         type: Boolean,
         default: false
     },
-    comments: [commentSchema]
+    comments: [commentSchema] //subdocument
 }, {
     timestamps: true
 });
