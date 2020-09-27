@@ -189,10 +189,9 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
             })
             .catch(err => next(err));
         } else {
+            err = new Error ("You are not the author of this comment, you cannot modify it.");
             res.statusCode = 403;
-            err = new Error (`You are not the author of this comment, you cannot modify it.`);
-            res.setHeader('Content-Type', 'application/json');
-            res.json(campsite);
+            return next(err);
         }
         } else if (!campsite) {
             err = new Error(`Campsite ${req.params.campsiteId} not found`);
@@ -220,10 +219,9 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
             })
             .catch(err => next(err));
         } else {
+            err = new Error ("You are not the author of this comment, you cannot delete it.");
             res.statusCode = 403;
-            err = new Error (`You are not the author of this comment, you cannot delete it.`);
-            res.setHeader('Content-Type', 'application/json');
-            res.json(campsite);
+            return next(err);
         }
         } else if (!campsite) {
             err = new Error(`Campsite ${req.params.campsiteId} not found`);
